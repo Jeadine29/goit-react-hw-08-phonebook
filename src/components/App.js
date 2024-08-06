@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { fetchCurrentUser } from '../../redux/auth/operations';
-import { selectIsLoggedIn, selectIsFetchingCurrentUser } from '../../redux/auth/selectors';
-import Navigation from '../Navigation/Navigation';
-import Register from '../Auth/Register';
-import Login from '../Auth/Login';
-import Contacts from '../Contacts/Contacts'; // Create a Contacts component to wrap the contact-related components
-import UserMenu from '../UserMenu/UserMenu';
-import './App.module.css';
+import { fetchCurrentUser } from '../redux/auth/operations';
+import { selectIsLoggedIn, selectIsFetchingCurrentUser } from '../redux/auth/selectors';
+import Navigation from './Navigation/Navigation';
+import Register from './Auth/Register';
+import Login from './Auth/Login';
+import Contacts from './Contacts/Contacts';
+import UserMenu from './UserMenu/UserMenu';
+import './App.module.css'; // Ensure this path is correct
 
 const App = () => {
   const dispatch = useDispatch();

@@ -1,18 +1,15 @@
 .filter {
-    width: 300px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.label {
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.input {
-    padding: 10px;
-    border: 1px solid #ddd;
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 25px;
+}
+
+input:focus {
+    border-color: #007bff;
+    /* Blue border on focus */
+    outline: none;
 }

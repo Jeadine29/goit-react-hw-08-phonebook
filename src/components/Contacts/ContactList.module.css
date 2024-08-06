@@ -1,26 +1,19 @@
 .list {
-    width: 300px;
-    margin: 20px auto;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
 .item {
-    display: flex;
-    justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ccc;
 }
 
-.button {
-    padding: 5px 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+button {
+    background-color: #dc3545;
+    /* Red background for delete button */
 }
 
-.button:hover {
-    background-color: darkred;
+button:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
 }

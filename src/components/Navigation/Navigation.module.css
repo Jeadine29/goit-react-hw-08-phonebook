@@ -1,18 +1,21 @@
-.nav {
+.navigation {
     display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ccc;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-.link {
+a {
+    color: #007bff;
+    /* Blue color for links */
     text-decoration: none;
-    color: #333;
-    padding: 10px 20px;
-    border-radius: 5px;
+    font-weight: bold;
 }
 
-.link:hover {
-    background-color: #e0e0e0;
+a.active {
+    color: #28a745;
+    /* Green color for active link */
+}
+
+a:hover {
+    text-decoration: underline;
 }

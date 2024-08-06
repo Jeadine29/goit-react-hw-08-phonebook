@@ -1,48 +1,38 @@
-// src/components/Contacts/Contacts.js
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from '../Filter/Filter';
-import { fetchAll, addContact, deleteContact } from '../../redux/operations';
-import { selectIsLoading, selectError, selectFilteredContacts, selectFilter } from '../../redux/selectors';
-import { setFilter } from '../../redux/filterSlice';
-import styles from './Contacts.module.css';
+import { fetchAll, addContact, deleteContact } from '../../redux/contacts/operations';
 
-const Contacts = () => {
+function Contacts() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const contacts = useSelector(selectFilteredContacts);
-  const filter = useSelector(selectFilter);
+  const contacts = useSelector(state => state.contacts.items);
 
   useEffect(() => {
     dispatch(fetchAll());
   }, [dispatch]);
 
-  const handleAddContact = (name, number) => {
-    dispatch(addContact({ name, number }));
+  const handleAddContact = (contact) => {
+    dispatch(addContact(contact));
   };
 
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
-  };
-
-  const handleFilterChange = (e) => {
-    dispatch(setFilter(e.target.value));
+  const handleDeleteContact = (contactId) => {
+    dispatch(deleteContact(contactId));
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={handleAddContact} />
-      <h2>Contacts</h2>
-      <Filter value={filter} onChange={handleFilterChange} />
-      {isLoading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      <ContactList contacts={contacts} onDeleteContact={handleDeleteContact} />
+    <div>
+      <h1>Contacts</h1>
+      <button onClick={() => handleAddContact({ name: 'New Contact', number: '123456789' })}>
+        Add Contact
+      </button>
+      <ul>
+        {contacts.map(contact => (
+          <li key={contact.id}>
+            {contact.name} - {contact.number}
+            <button onClick={() => handleDeleteContact(contact.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default Contacts;

@@ -1,25 +1,17 @@
-.userMenu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.user-menu {
+    background-color: #fff;
+    /* White background for user menu */
     padding: 10px;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ccc;
-}
-
-.userMenu p {
-    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 button {
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #dc3545;
+    /* Red background for logout button */
 }
 
 button:hover {
-    background-color: #d32f2f;
+    background-color: #c82333;
+    /* Darker red on hover */
 }

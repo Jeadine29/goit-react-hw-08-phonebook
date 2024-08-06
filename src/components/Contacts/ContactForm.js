@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/operations';
-import styles from './ContactForm.module.css';
+import { addContact } from '../../redux/contacts/operations';
+import './ContactForm.module.css';
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
-  const handleChange = ({ target: { name, value } }) => {
-    if (name === 'name') setName(value);
-    if (name === 'number') setNumber(value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(addContact({ name, number }));
     setName('');
@@ -22,42 +16,26 @@ const ContactForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.label}>
+    <form onSubmit={handleSubmit} className="form">
+      <label>
         Name
         <input
-          className={styles.input}
           type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces."
-          required
           value={name}
-          onChange={handleChange}
+          onChange={e => setName(e.target.value)}
         />
       </label>
-      <label className={styles.label}>
+      <label>
         Number
         <input
-          className={styles.input}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
+          type="text"
           value={number}
-          onChange={handleChange}
+          onChange={e => setNumber(e.target.value)}
         />
       </label>
-      <button className={styles.button} type="submit">
-        Add contact
-      </button>
+      <button type="submit">Add Contact</button>
     </form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

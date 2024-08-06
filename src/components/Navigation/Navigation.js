@@ -1,14 +1,13 @@
-// src/components/Navigation/Navigation.js
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './Navigation.module.css';
+import { Link } from 'react-router-dom';
 
-const Navigation = () => (
-  <nav className={styles.nav}>
-    <NavLink to="/register" className={styles.link}>Register</NavLink>
-    <NavLink to="/login" className={styles.link}>Login</NavLink>
-    <NavLink to="/contacts" className={styles.link}>Contacts</NavLink>
-  </nav>
-);
+function Navigation() {
+  return (
+    <nav>
+      <Link to="/register">Register</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/contacts">Contacts</Link>
+    </nav>
+  );
+}
 
 export default Navigation;
