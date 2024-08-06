@@ -1,28 +1,41 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation'; // Adjusted path
-import Home from 'pages/Home/Home'; // Adjusted path
-import Login from '../pages/Login/Login';
-import Register from 'pages/Register/Register'; // Adjusted path
-import Phonebook from '../pages/Phonebook/Phonebook';
-import NotFound from '../pages/NotFound/NotFound';
-import PrivateRoute from '../PrivateRoute/PrivateRoute'; // Adjusted path
-import PublicRoute from '../PublicRoute/PublicRoute'; // Adjusted path
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { fetchCurrentUser } from '../../redux/auth/operations';
+import { selectIsLoggedIn, selectIsFetchingCurrentUser } from '../../redux/auth/selectors';
+import Navigation from '../Navigation/Navigation';
+import Register from '../Auth/Register';
+import Login from '../Auth/Login';
+import Contacts from '../Contacts/Contacts'; // Create a Contacts component to wrap the contact-related components
+import UserMenu from '../UserMenu/UserMenu';
+import './App.module.css';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <div>
-      <Router>
+    <Router>
+      <div className="container">
         <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<PublicRoute restricted><Login /></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute restricted><Register /></PublicRoute>} />
-          <Route path="/phonebook" element={<PrivateRoute><Phonebook /></PrivateRoute>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </div>
+        {isFetchingCurrentUser ? (
+          <p>Loading...</p>
+        ) : (
+          <Routes>
+            <Route path="/register" element={!isLoggedIn ? <Register /> : <Navigate to="/contacts" />} />
+            <Route path="/login" element={!isLoggedIn ? <Login /> : <Navigate to="/contacts" />} />
+            <Route path="/contacts" element={isLoggedIn ? <Contacts /> : <Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to={isLoggedIn ? "/contacts" : "/login"} />} />
+          </Routes>
+        )}
+        {isLoggedIn && <UserMenu />}
+      </div>
+    </Router>
   );
 };
 

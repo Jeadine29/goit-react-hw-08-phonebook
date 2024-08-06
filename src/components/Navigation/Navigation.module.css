@@ -1,24 +1,18 @@
-.nav__link {
-    position: relative;
-    margin-left: 10px;
-    color: black;
-    text-decoration: none;
-    transition: color 500ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav__link:active,
-.nav__link:hover,
-.nav__link:active {
-    color: orange;
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.header {
+.nav {
     display: flex;
-    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+}
 
-    height: 41px;
-    box-shadow: 0px 2px 7px 0px grey;
+.link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
 
-    margin-bottom: 10px;
+.link:hover {
+    background-color: #e0e0e0;
 }
