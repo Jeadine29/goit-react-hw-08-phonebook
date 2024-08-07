@@ -1,19 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { Spinner } from "react-bootstrap";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./redux/store";
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux/store';
+import App from './App';
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<Spinner animation="border" />} persistor={persistor}>
+    <ChakraProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </PersistGate>
+    </ChakraProvider>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
