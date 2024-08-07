@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Contacts from './pages/Contacts/Contacts';
+import Contacts from './pages/Contacts';
 import Navigation from './components/Navigation';
 import { useSelector } from 'react-redux';
 
