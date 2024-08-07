@@ -1,19 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './ContactListItem.module.css';
+import React from "react";
+import { Card, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Avatars from "./Avatars";
+import { connect } from "react-redux";
+import { removeContact } from "../../redux/contacts/contactsOperations";
 
-const ContactListItem = ({ id, name, number, onDelete }) => (
-  <li className={styles.item}>
-    {name}: {number}
-    <button className={styles.button} onClick={() => onDelete(id)}>Delete</button>
-  </li>
-);
+function ContactListItem({ contact, removeContact }) {
+  return (
+    <Card
+      className="col mb-5"
+      border="primary"
+      style={{ width: "18rem", margin: "10px", flex: "0 0 80%" }}
+    >
+      <Avatars />
+      <Card.Body>
+        <Card.Title>{contact.name}</Card.Title>
+        <Card.Text>Email: test@email.com</Card.Text>
+        <Card.Text>Number: {contact.number}</Card.Text>
+        <Button
+          variant="primary"
+          type="button"
+          id={contact.id}
+          onClick={(e) => removeContact(e.target.id)}
+        >
+          Delete contact
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+}
 
-ContactListItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  removeContact,
 };
 
-export default ContactListItem;
+export default connect(null, mapDispatchToProps)(ContactListItem);
